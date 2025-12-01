@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>스마트 화분 - 상태</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+<div class="page-wrapper">
+  <div class="status-container">
+
+    <img src="{{ url_for('static', filename='img/plant.png') }}"
+         class="status-image" />
+
+    <h1 class="page-title">현재 상태</h1>
+
+    <div class="info-card">
+      <span class="info-card-title">조도 센서</span>
+      <span class="info-card-value" id="lightValue">0%</span>
+      <div class="progress-bar">
+        <div class="progress-fill" id="lightBar"></div>
+      </div>
+    </div>
+
+    <div class="info-card">
+      <span class="info-card-title">토양 수분</span>
+      <span class="info-card-value" id="moistureValue">0%</span>
+      <div class="progress-bar">
+        <div class="progress-fill" id="moistureBar"></div>
+      </div>
+    </div>
+
+  </div>
+
+  <nav class="bottom-nav">
+    <a href="/status" class="nav-item active">
+      <img src="{{ url_for('static', filename='img/status_button.png') }}" class="nav-icon-img">
+    </a>
+    <a href="/home" class="nav-item">
+      <img src="{{ url_for('static', filename='img/home_button.png') }}" class="nav-icon-img">
+    </a>
+    <a href="/status" class="nav-item">
+      <img src="{{ url_for('static', filename='img/graph_button.png') }}" class="nav-icon-img">
+    </a>
+  </nav>
+</div>
+
+
+<script>
+  function updateStatus() {
+    fetch("/api/sensor")
+      .then(res => res.json())
+      .then(data => {
+        document.getElementById("lightValue").innerText = data.light + "%";
+        document.getElementById("moistureValue").innerText = data.moisture + "%";
+
+        document.getElementById("lightBar").style.width = data.light + "%";
+        document.getElementById("moistureBar").style.width = data.moisture + "%";
+      });
+  }
+
+  setInterval(updateStatus, 5000);
+  updateStatus();
+</script>
+
+</body>
+</html>

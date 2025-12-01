@@ -1,0 +1,245 @@
+/* ===========================
+   기본 레이아웃
+=========================== */
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+  }
+  
+  body {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: #DFF3FF;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  /* 앱 화면 크기 고정 */
+  .page-wrapper {
+    width: 100%;
+    max-width: 430px;
+    height: 100vh;
+    max-height: 932px;
+    padding-bottom: 120px;
+    box-sizing: border-box;
+    overflow: hidden;
+    position: relative; /* dark-overlay & nav 기준 */
+  }
+  
+  /* ===========================
+     HOME 화면
+  =========================== */
+  .home-container {
+    padding: 100px 24px 24px;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .plant-section {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  /* 식물 이미지 */
+  .plant-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+  
+  .plant-image {
+    width: 500px;
+    height: 500px;
+    object-fit: contain;
+    margin-left: 40px;  /* 오른쪽으로 조금 이동 */
+  }
+  
+  /* 식물 이름 */
+  .plant-name {
+    margin: 0;
+    font-size: 35px;
+    font-weight: 700;
+    color: #03314b;
+  }
+  
+  /* D-12 */
+  .plant-day {
+    margin: 6px 0 20px;
+    font-size: 25px;
+    color: #5f6c7b;
+  }
+  
+  /* 물 주기 버튼 */
+  .water-button {
+    width: 215px;
+    height: 65px;
+    border-radius: 25px;
+    border: none;
+    background: #A7D29A;
+    color: #ffffff;
+    font-size: 25px;
+    font-weight: 600;
+    cursor: pointer;
+  
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  /* ===========================
+     STATUS 화면
+  =========================== */
+  
+  .status-container {
+    padding: 0 24px 24px;
+  }
+  
+  .status-image {
+    width: 180px;
+    height: 180px;
+    object-fit: contain;
+    display: block;
+    margin: 120px auto 0px;
+  }
+  
+  /* 현재 상태 제목 */
+  .page-title {
+    margin: 0 0 50px;
+    padding: 10px 24px 0;
+    font-size: 24px;
+    font-weight: 700;
+    color: #03314b;
+    text-align: center;
+  }
+  
+  /* 카드 */
+  .info-card {
+    background: #ffffff;
+    border-radius: 25px;
+    padding: 16px 20px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.06);
+    margin-bottom: 30px;
+  }
+  
+  .info-card-title {
+    display: inline-block;
+    font-size: 25px;
+    color: #5f6c7b;
+  }
+  
+  .info-card-value {
+    float: right;
+    font-size: 30px;
+    font-weight: 600;
+    color: #8DBF7E;
+  }
+  
+  /* 진행 바 */
+  .progress-bar {
+    clear: both;
+    margin-top: 30px;
+    width: 100%;
+    height: 40px;
+    border-radius: 30px;
+    background: #e3edf5;
+    overflow: hidden;
+  }
+  
+  .progress-fill {
+    height: 100%;
+    border-radius: 999px;
+    background: #A7D29A;
+  }
+  
+  /* ===========================
+     하단 네비게이션
+  =========================== */
+  
+  .bottom-nav {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 84px;
+    background: #ffffff;
+  
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  
+    z-index: 20;  /* dark overlay보다 위 */
+  }
+  
+  .nav-item {
+    text-decoration: none;
+    color: #829ab1;
+    font-size: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .nav-icon-img {
+    width: 50px;
+    height: 50px;
+  }
+  
+  .nav-item.active {
+    color: #2c5282;
+    font-weight: 600;
+  }
+  
+  /* ===========================
+     햇빛 부족 시 화면 어둡게
+  =========================== */
+  
+  .dark-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+  
+    width: 100%;
+    height: calc(100% - 84px); /* 네비 제외 */
+  
+    background: rgba(0, 0, 0, 0.35);
+    z-index: 10;
+  
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .popup-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.45);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+  }
+  
+  .popup-image {
+    width: 80%;
+    max-width: 340px;
+    border-radius: 20px;
+    animation: fadeIn 0.3s ease-out;
+  }
+  
+  @keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.92); }
+    to   { opacity: 1; transform: scale(1); }
+  }
+
+  .home-big .nav-icon-img {
+    width: 65px;  
+    height: 65px;
+  }
+  
+  
